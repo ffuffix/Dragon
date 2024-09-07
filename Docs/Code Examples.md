@@ -28,7 +28,7 @@ end)
 ```
 
 
-# Automatic Profile Sessions
+# Automatic Profile Sessions With Template
 You can grab the data from Player.Profile in this code example
 To change data simply do Player.Profile:SetAttribute("Shards", 1) or whatever amount you want and it will persist among different sessions
 ```
