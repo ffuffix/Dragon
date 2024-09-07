@@ -18,7 +18,7 @@ Now you can start getting and manipulating data
 ```
 local Data = D:Get("Runs"):Now():GetData() or 0 -- 0 if data doesn't exist
 
-print(Data:GetData()) --> 0 or above if ran multiple times
+print(Data) --> 0 or above if ran multiple times
 
 D:Set("Runs", Data + 1):Now()
 ```
