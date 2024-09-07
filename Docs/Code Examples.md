@@ -1,6 +1,6 @@
 # Setup
 
-```
+```luau
 local Dragon = require(path.to.dragon)
 
 local D = Dragon.DataStore("Profiles")
@@ -11,7 +11,7 @@ D:Init()
 
 # Basic profile structure
 
-```
+```luau
 local Dragon = require(path.to.dragon)
 local D = Dragon.DataStore("Profiles")
 
@@ -31,7 +31,7 @@ end)
 # Automatic Profile Sessions With Template
 You can grab the data from Player.Profile in this code example
 To change data simply do Player.Profile:SetAttribute("Shards", 1) or whatever amount you want and it will persist among different sessions
-```
+```luau
 local Dragon = require(path.to.dragon)
 local D = Dragon.DataStore("Profiles")
 
