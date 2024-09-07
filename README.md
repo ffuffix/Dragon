@@ -8,14 +8,14 @@ I made this since it helps to jump into data saving & loading really fast with j
 ## Quickstart
 To access Dragon put the Module inside of a place where you can easily find it
 Next require it and Init with your own arguments!
-```
+```luau
 local Dragon = require("path.to.dragon")
 local D = Dragon.DataStore("DataStore")
 
 D:Init({ Scope = "V1" }) -- Optional table with scope argument
 ```
 Now you can start getting and manipulating data
-```
+```luau
 local Data = D:Get("Runs"):Now():GetData() or 0 -- 0 if data doesn't exist
 
 print(Data) --> 0 or above if ran multiple times
