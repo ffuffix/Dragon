@@ -80,14 +80,15 @@ function LoadedObject:Attributes(FolderName: string?)
 
 
 	for K, V in CurrentData do
-		Attributes:SetAttribute(K, if typeof(V) == "table" then HttpService:JSONEncode(V) else V)
+		local IsTableValue = if typeof(V) == "table" then true else false
+		
+		Attributes:SetAttribute(K, if IsTableValue then HttpService:JSONEncode(V) else V)
 		
 		self.Connections["Attribute_" .. K] = Attributes:GetAttributeChangedSignal(K):Connect(function()
 			
 			local ChangedValue = Attributes:GetAttribute(K)
-			--print(K, ChangedValue)
 			
-			self.Data[K] = if typeof(ChangedValue) == "table" then HttpService:JSONDecode(ChangedValue) else ChangedValue
+			self.Data[K] = if IsTableValue then HttpService:JSONDecode(ChangedValue) else ChangedValue
 			self.Info.Saved = false
 			
 		end)
