@@ -4,9 +4,6 @@ local Dragon = script:FindFirstAncestor("Dragon")
 local DataStoreService = game:GetService("DataStoreService")
 local SharedTableRegistry = game:GetService("SharedTableRegistry")
 
-local MemoryStoreService = game:GetService("MemoryStoreService")
-local Sessions = MemoryStoreService:GetHashMap("Dragon_Sessions")
-
 local Logs = require(Dragon.Logs)
 local Util = require(Dragon.Util)
 
@@ -111,6 +108,19 @@ function D:Set(Key: string, Value: any, UserIds: { number? })
 	
 	return setmetatable(CREATEOBJECT_G(self, LastFunction, Key), DataM)
 
+end
+
+
+function D:Delete(Key: string)
+	
+	local DataStore = self.Store :: DataStore
+
+	local LastFunction = function()
+		return DataStore:RemoveAsync(Key)
+	end
+
+	return setmetatable(CREATEOBJECT_G(self, LastFunction, Key), DataM)
+	
 end
 
 
