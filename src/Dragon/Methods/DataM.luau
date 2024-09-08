@@ -1,5 +1,6 @@
 
-local LoadedObject = require(script.LoadedObject)
+local Dragon = script:FindFirstAncestor("Dragon")
+local LoadedObject = require(Dragon.Methods.Objects.LoadedObject)
 
 local M = {}
 M.__index = M

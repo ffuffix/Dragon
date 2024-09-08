@@ -8,8 +8,10 @@ local Sessions = MemoryStoreService:GetHashMap("Dragon_Sessions")
 
 local HttpService = game:GetService("HttpService")
 
-local Util = require(Dragon.Util)
-local Logs = require(Dragon.Logs)
+local Internal = Dragon.Internal
+
+local Logs = require(Internal.Logs)
+local Util = require(Internal.Util)
 
 
 local LoadedObject = {}

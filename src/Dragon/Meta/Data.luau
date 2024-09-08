@@ -4,10 +4,13 @@ local Dragon = script:FindFirstAncestor("Dragon")
 local DataStoreService = game:GetService("DataStoreService")
 local SharedTableRegistry = game:GetService("SharedTableRegistry")
 
-local Logs = require(Dragon.Logs)
-local Util = require(Dragon.Util)
+local Internal = Dragon.Internal
+local Methods = Dragon.Methods
 
-local DataM = require(Dragon.Methods.DataM)
+local Logs = require(Internal.Logs)
+local Util = require(Internal.Util)
+
+local DataM = require(Methods.DataM)
 
 local D = {}
 D.__index = D
