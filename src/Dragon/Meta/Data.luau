@@ -59,7 +59,7 @@ function D:Reconcile(Data: { [string]: any }): { [string]: any }
 	
 	local Config = self.Configuration or { }
 	
-	return Util.ReconcileTable(DataTable or {}, self.Template or {}, Config["RemovesOutdatedKeys"])
+	return Util.ReconcileTable(Data or {}, self.Template or {}, Config["RemovesOutdatedKeys"])
 	
 end
 
