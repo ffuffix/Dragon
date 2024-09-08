@@ -45,7 +45,28 @@ function LoadedObject:GetData()
 end
 
 
-function LoadedObject:Release()
+function LoadedObject:Catch(Function: (any, Reason: string?) -> ())
+	
+	local SessionErrorEvent = self.SessionErrorEvent :: BindableEvent?
+
+	if not self.Info.Success then
+		Function(self, "An error occured")
+	end
+	
+	if SessionErrorEvent then
+		if not self.Connections then self.Connections = {} end
+		
+		self.Connections["SessionErrorEvent"] = SessionErrorEvent.Event:Connect(function(...: any) 
+			Function(self, ...)
+		end)
+	end
+	
+	return self
+	
+end
+
+
+function LoadedObject:Release(): ()
 	
 	if self.Threads and next(self.Threads) ~= nil then
 		for Idx, Thread in self.Threads do
@@ -56,11 +77,16 @@ function LoadedObject:Release()
 		for Idx, Connection in self.Connections or {} do
 			Connection:Disconnect()
 		end
+		
+		if self.SessionLocked then
+			Sessions:RemoveAsync(self.Info.Key)
+		end
 	else
 		warn(Logs["Prefix"] .. Logs["WARNINGS"]["005"])
 	end
 	
-	return self
+	setmetatable(self, nil)
+	self = nil
 	
 end
 
@@ -120,8 +146,12 @@ function LoadedObject:CreateSession(T: { Player: Player?, SessionLocked: boolean
 	local SaveRate = T["SaveRate"]
 	
 	
+	self.SessionErrorEvent = Instance.new("BindableEvent")
+	
+	
 	if SessionLocked then
 		Sessions:SetAsync(Key, true, SessionExpiration or 86400)
+		self.SessionLocked = Key
 	end
 	
 	self.Info["Saved"] = true
@@ -142,12 +172,16 @@ function LoadedObject:CreateSession(T: { Player: Player?, SessionLocked: boolean
 				
 				Data = self.Data
 				
-				pcall(function()
+				local Success, Result = pcall(function()
 					
 					Store:SetAsync(Key, self.Data, if ID then { ID } else nil)
 					self.Info.Saved = true
 					
 				end)
+				
+				if not Success then
+					self.SessionErrorEvent:Fire(Result)
+				end
 			end
 			
 			if D_1 then
