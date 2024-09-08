@@ -12,7 +12,6 @@ Dragon is a powerful and flexible data solution for Roblox experiences. This doc
     - Delete Data
 4. Error Handling
 5. Examples
-6. FAQ
 
 ## Getting Started
 To get started with Dragon, you have to get the latest version of Dragon which can be found on this github repository.
