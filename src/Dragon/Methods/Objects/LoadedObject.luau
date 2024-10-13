@@ -108,7 +108,7 @@ function LoadedObject:Attributes(FolderName: string?)
 
 
 	for K, V in CurrentData do
-		local IsTableValue = if typeof(V) == "table" then true else false
+		local IsTableValue = if typeof(V) == "table" or typeof(V) == "SharedTable" then true else false
 		
 		Attributes:SetAttribute(K, if IsTableValue then HttpService:JSONEncode(V) else V)
 		
